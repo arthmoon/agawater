@@ -2,6 +2,10 @@
 namespace api\controllers;
 
 use Yii;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -12,89 +16,40 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
+    public $enableCsrfValidation = false;
+
+    public function init()
+    {
+        parent::init();
+        Yii::$app->user->enableSession = false;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBasicAuth::class,
+                HttpBearerAuth::class,
+                QueryParamAuth::class,
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+            'except'      => ['index'],
         ];
+        return $behaviors;
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
+     * @return array
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        return [
+            'action' => 'index',
+            'params' => 123
+        ];
     }
 }

@@ -15,6 +15,13 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-api',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
+        'response'     => [
+            'format'  => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8'
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -37,14 +44,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
