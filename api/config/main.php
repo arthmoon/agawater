@@ -22,7 +22,7 @@ return [
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the backend
+            // this is the name of the session cookie used for login on the api
             'name' => 'advanced-api',
         ],
         'log' => [
