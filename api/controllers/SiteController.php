@@ -52,4 +52,12 @@ class SiteController extends Controller
             'params' => 123
         ];
     }
+
+    public function actionPing()
+    {
+        $request = Yii::$app->request->rawBody;
+        return [
+            'request' => $request
+        ];
+    }
 }

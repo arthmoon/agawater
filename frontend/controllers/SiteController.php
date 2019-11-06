@@ -3,8 +3,6 @@ namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
-use nizsheanez\jsonRpc\Action;
-use nizsheanez\jsonRpc\Client;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -76,14 +74,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        /*$client = new Client('http://test.mobclient.i/api/v1');
-        $response = $client->callServer('interactives_since', [
-            "since"    => 1565685717,
-            "password" => "a.mun",
-            "username" => "a.mun"
-        ], 'http://test.mobclient.i/api/v1');
+        Yii::debug("debug test" . __METHOD__);
 
-        print_r($response);die;*/
         return $this->render('index');
     }
 
