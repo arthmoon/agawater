@@ -1,0 +1,72 @@
+server {
+        charset utf-8;
+        client_max_body_size 128M;
+        
+        listen 10.8.0.1:8080;
+        listen 37.140.198.43:8080;
+  
+        server_name api.water;
+        root /var/www/agawater/api/web;
+        index index.php;
+
+        access_log  /var/www/agawater/api/runtime/access.log;
+        error_log   /var/www/agawater/api/runtime/error.log;
+
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ ^/assets/.*\.php$ {
+            deny all;
+        }
+
+        location ~ \.php$ {
+            #include snippets/fastcgi-php.conf; 
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+            #fastcgi_pass 127.0.0.1:9000;
+            try_files $uri =404;
+        }
+
+        location ~* /\. {
+            deny all;
+        }
+}
+server {
+        charset utf-8;
+        client_max_body_size 128M;
+
+        listen 10.8.0.1:80;
+        listen 37.140.198.43:80;
+
+        server_name front.water;
+        root /var/www/agawater/frontend/web;
+        index index.php;
+
+        access_log  /var/www/agawater/frontend/runtime/access.log;
+        error_log   /var/www/agawater/frontend/runtime/error.log;
+
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ ^/assets/.*\.php$ {
+            deny all;
+        }
+
+        location ~ \.php$ {
+            #include snippets/fastcgi-php.conf; 
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+            #fastcgi_pass 127.0.0.1:9000;
+            try_files $uri =404;
+        }
+
+        location ~* /\. {
+            deny all;
+        }
+}
+
+
