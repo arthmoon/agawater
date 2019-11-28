@@ -1,6 +1,7 @@
 <?php
 namespace api\controllers;
 
+use common\models\Device;
 use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
@@ -53,11 +54,20 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * @return bool
+     */
     public function actionPing()
     {
         $request = Yii::$app->request->rawBody;
-        return [
-            'request' => $request
-        ];
+        $device = Device::find()->where(['uid' => $request['uid']]);
+        if (!$device) {
+            $device         = new Device();
+            $device->status = Device::STATUS_ON;
+        }
+        $device->name        = $request['name'];
+        $device->ip          = $request['ip'];
+        $device->last_online = date('Y-m-d h:i:s');
+        return $device->save(false);
     }
 }

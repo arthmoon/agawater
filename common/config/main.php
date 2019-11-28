@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'АГА Водоснабжение',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
