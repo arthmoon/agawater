@@ -1,6 +1,7 @@
 <?php
 
 use common\models\User;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 return [
@@ -67,12 +68,39 @@ return [
         },
         'viewOptions' => ['role' => 'modal-remote', 'title' => 'View', 'data-toggle' => 'tooltip'],
         'updateOptions' => ['role' => 'modal-remote', 'title' => 'Update', 'data-toggle' => 'tooltip'],
-        'deleteOptions' => ['role' => 'modal-remote', 'title' => 'Delete',
-            'data-confirm' => false, 'data-method' => false,// for overide yii data api
-            'data-request-method' => 'post',
-            'data-toggle' => 'tooltip',
-            'data-confirm-title' => 'Are you sure?',
-            'data-confirm-message' => 'Are you sure want to delete this item'],
-    ],
-
+//        'deleteOptions' => ['role' => 'modal-remote', 'title' => 'Delete',
+//            'data-confirm' => false, 'data-method' => false,// for overide yii data api
+//            'data-request-method' => 'post',
+//            'data-toggle' => 'tooltip',
+//            'data-confirm-title' => 'Are you sure?',
+//            'data-confirm-message' => 'Are you sure want to delete this item'],
+        'buttons' => [
+            'view'      => function ($url, $user) {
+                return Html::a(
+                    '<span class="glyphicon glyphicon-search"></span>',
+                    ['user/view', 'id' => $user->id],
+                    ['role' => 'modal-remote', 'data-toggle' => 'tooltip']
+                );
+            },
+            'update'      => function ($url, $user) {
+                return Html::a(
+                    '<span class="glyphicon glyphicon-edit"></span>',
+                    ['user/update', 'id' => $user->id],
+                    ['role' => 'modal-remote', 'data-toggle' => 'tooltip']
+                );
+            },
+            'delete' => function ($url, $user) {
+                return Html::a(
+                    '<span class="glyphicon glyphicon-trash"></span>',
+                    ['user/delete', 'id' => $user->id],
+                    [
+                        'title'        => 'Удалить',
+                        'data-confirm' => 'Вы точно хотите удалить?',
+                        'data-method'  => 'post',
+                        'data-pjax'    => '0',
+                    ]
+                );
+            }
+        ]
+    ]
 ];   

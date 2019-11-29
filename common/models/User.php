@@ -74,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
-            ['role', 'default', 'value' => self::ROLE_GUEST],
+            ['role', 'default', 'value' => self::ROLE_USER],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
         ];
     }
