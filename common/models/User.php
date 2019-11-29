@@ -20,6 +20,14 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $position
+ * @property int $role
+ * @property string $image
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $father_name
+ * @property string $phone
+ *
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -28,7 +36,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    const ROLE_GUEST   = 0;
     const ROLE_USER    = 1;
     const ROLE_MANAGER = 2;
     const ROLE_ADMIN   = 10;
@@ -58,8 +65,67 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['status', 'created_at', 'updated_at', 'role'], 'integer'],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['position', 'first_name', 'last_name', 'father_name', 'phone'], 'string', 'max' => 250],
+            [['image'], 'string', 'max' => 500],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
+            ['role', 'default', 'value' => self::ROLE_GUEST],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_DELETED  => 'Удален',
+            self::STATUS_INACTIVE => 'Заблокирован',
+            self::STATUS_ACTIVE   => 'Активный',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRoleList()
+    {
+        return [
+            self::ROLE_USER    => 'Пользователь',
+            self::ROLE_MANAGER => 'Менеджер',
+            self::ROLE_ADMIN   => 'Администратор',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'                   => 'ID',
+            'username'             => 'Username',
+            'auth_key'             => 'Auth Key',
+            'password_hash'        => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email'                => 'Email',
+            'status'               => 'Status',
+            'created_at'           => 'Created At',
+            'updated_at'           => 'Updated At',
+            'verification_token'   => 'Verification Token',
+            'position'             => 'Position',
+            'role'                 => 'Role',
+            'image'                => 'Image',
+            'first_name'           => 'First Name',
+            'last_name'            => 'Last Name',
+            'father_name'          => 'Father Name',
+            'phone'                => 'Phone',
         ];
     }
 
@@ -72,7 +138,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $token
+     * @param null $type
+     * @return void|IdentityInterface|null
+     * @throws NotSupportedException
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -88,6 +157,34 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * @param $phone
+     * @return User|null
+     */
+    public static function findByPhone($phone)
+    {
+        return static::findOne([
+            'phone' => $phone,
+            'status' => self::STATUS_ACTIVE,
+            'role' => [self::ROLE_MANAGER, self::ROLE_ADMIN]
+        ]);
+    }
+
+    /**
+     * @param $login
+     * @return array|User|ActiveRecord|null
+     */
+    public static function findByAny($login)
+    {
+        return static::find()
+            ->where(['OR',
+                ['phone'    => $login],
+                ['username' => $login],
+                ['email'    => $login],
+            ])
+            ->one();
     }
 
     /**
@@ -176,7 +273,8 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates password hash from password and sets it to the model
      *
-     * @param string $password
+     * @param $password
+     * @throws \yii\base\Exception
      */
     public function setPassword($password)
     {
@@ -185,6 +283,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates "remember me" authentication key
+     *
+     * @throws \yii\base\Exception
      */
     public function generateAuthKey()
     {
@@ -193,12 +293,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates new password reset token
+     *
+     * @throws \yii\base\Exception
      */
     public function generatePasswordResetToken()
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function generateEmailVerificationToken()
     {
         $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();

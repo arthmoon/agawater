@@ -19,7 +19,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
 //                  ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Пользователи', 'icon' => 'user-o', 'url' => ['/gii']],
+                    ['label' => 'Пользователи', 'icon' => 'user-o', 'url' => ['/user']],
                     ['label' => 'Абоненты', 'icon' => 'address-book-o', 'url' => ['/debug']],
                     ['label' => 'Водокачки', 'icon' => 'tv', 'url' => ['/debug']],
 //                  ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

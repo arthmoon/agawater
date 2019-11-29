@@ -13,6 +13,7 @@ use Yii;
  * @property string $ip Internal Ip
  * @property string $last_online Last Online
  * @property int $status Status
+ * @property string $params Params
  *
  * @property Command[] $commands
  */
@@ -37,6 +38,7 @@ class Device extends \yii\db\ActiveRecord
             [['last_online'], 'safe'],
             [['status'], 'integer'],
             [['uid', 'name', 'ip'], 'string', 'max' => 100],
+            [['params'], 'string'],
         ];
     }
 
@@ -52,6 +54,7 @@ class Device extends \yii\db\ActiveRecord
             'ip'          => 'Ip',
             'last_online' => 'Last Online',
             'status'      => 'Status',
+            'params'      => 'Params',
         ];
     }
 
