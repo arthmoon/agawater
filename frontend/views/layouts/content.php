@@ -2,7 +2,6 @@
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
 
-$this->title = 'Главная';
 
 ?>
 <div class="content-wrapper">
@@ -24,11 +23,9 @@ $this->title = 'Главная';
         <?php } ?>
 
         <?=
-        Breadcrumbs::widget(
-            [
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]
-        ) ?>
+        Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
     </section>
 
     <section class="content">
@@ -41,7 +38,7 @@ $this->title = 'Главная';
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2019 <a href="http://agawater.ru">agawater.ru</a>.</strong> All rights reserved.
+    Copyright &copy; 2019 <a href="http://agawater.ru">agawater.ru</a>. All rights reserved.
 </footer>
 
 <!-- Control Sidebar -->

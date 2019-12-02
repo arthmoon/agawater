@@ -16,6 +16,8 @@ dmstr\web\AdminLteAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap&subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
 </head>
 <body class="login-page">
 

@@ -1,0 +1,131 @@
+html, body {
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+.login-page .login-box .login-logo{
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.login-page #login-form .form-control, .login-page #login-form .btn{
+    border-radius: 2px;
+}
+
+#agawater-body.skin-blue-light .main-header .navbar {
+    background-color: #243a46;
+}
+
+#agawater-body .main-header .logo {
+    background-color: #112c3c;
+    font-family: 'Ubuntu', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    color: #99b0c7;
+    line-height: 40px;
+}
+
+#agawater-body .navbar-nav>.user-menu>.dropdown-menu {
+    border-top-width: 0;
+    border-right-width: 0;
+    padding-top: 0;
+}
+
+#agawater-body .form-control {
+    padding: 0px 12px;
+}
+
+#agawater-body input.form-control, #agawater-body select.form-control {
+    height: 30px;
+    border-radius: 2px;
+}
+
+#agawater-body .btn-xs, .btn-group-xs > .btn {
+    padding: 4px 10px;
+}
+
+#agawater-body .btn {
+    padding: 4px 10px;
+    line-height: 1.5;
+}
+
+#agawater-body .modal-header {
+    padding: 8px;
+    border-radius: 1px;
+}
+
+#agawater-body label.control-label {
+    font-weight: normal;
+}
+
+label.label {
+    font-size: 80%;
+}
+
+#agawater-body .panel-primary {
+    border: none;
+}
+
+#agawater-body .panel-primary > .panel-heading {
+    background-color: #f5f5f5;
+    color: #4e4e4e;
+    border: none;
+}
+
+#agawater-body .panel-primary > .panel-heading > .panel-title {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#agawater-body .table-bordered > thead > tr > th {
+    font-weight: 500;
+}
+
+#agawater-body.skin-blue-light .sidebar-menu > li > a {
+    font-weight: 400;
+    padding: 9px 5px 9px 15px;
+}
+
+#agawater-body.skin-blue-light .sidebar-menu > li > a > span {
+    height: 38px;
+    padding-top: 9px;
+    font-weight: 400;
+}
+
+#agawater-body.skin-blue-light .sidebar-menu > li.active > a {
+    background: #6a8798;
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    #agawater-body.skin-blue-light .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+#agawater-body .main-header .navbar {
+    min-height: 40px;
+}
+
+#agawater-body .main-header .sidebar-toggle {
+    padding: 10px 15px;
+}
+
+#agawater-body.skin-blue-light .main-header li.user-header {
+    background-color: #6a8798;
+}
+
+#agawater-body #search-btn {
+    padding: 0 8px;
+    height: 28px;
+}
+
+#agawater-body .content-header > h1 {
+    font-size: 36px;
+    font-weight: 500;
+    color: #444;
+}

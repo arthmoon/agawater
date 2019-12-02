@@ -29,12 +29,10 @@ return [
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'position',
-        'label' => 'Должность'
     ],
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'role',
-        'label' => 'Роль',
         'value' => function (User $user) {
             return \yii\helpers\Html::label(User::getRoleList()[$user->role], 'role', [
                 'class' => "label label-info"
@@ -46,7 +44,6 @@ return [
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'status',
-        'label' => 'Статус',
         'value' => function (User $user) {
             $class = 'success';
             if ($user->status == User::STATUS_INACTIVE) $class = 'warning';

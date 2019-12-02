@@ -11,7 +11,6 @@ use yii\helpers\Html;
         '<span class="logo-mini"></span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl,
         [
             'class' => 'logo',
-            'style' => 'font-size: 16px;'
         ]
     ) ?>
 
@@ -82,21 +81,20 @@ use yii\helpers\Html;
                         <li class="user-header">
                             <img src="/img/user-girl.png" class="img-circle" alt="User Image" height="160"/>
 
-                            <p>
-                                Дашиев Булат
+                            <p>Дашиев Булат
                                 <small>Главный инженер</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Профиль</a>
+                                <a href="#" class="btn btn-default">Профиль</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
                                     'Выход',
                                     ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    ['data-method' => 'post', 'class' => 'btn btn-default']
                                 ) ?>
                             </div>
                         </li>

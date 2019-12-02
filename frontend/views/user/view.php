@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -12,17 +13,40 @@ use yii\widgets\DetailView;
         'attributes' => [
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'status',
-            'created_at',
-            'updated_at',
-            'verification_token',
+            [
+                'attribute' => 'fio',
+                'label' => 'ФИО',
+                'value' => function (User $user) {
+                    return "{$user->last_name} {$user->first_name} {$user->father_name}";
+                }
+            ],
             'position',
-            'role',
-            'image',
+            'phone',
+            'email:email',
+            [
+                'attribute' => 'status',
+                'value' => function (User $user) {
+                    return User::getStatusList()[$user->status];
+                }
+            ],
+            [
+                'attribute' => 'role',
+                'value' => function (User $user) {
+                    return User::getRoleList()[$user->role];
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'value' => function (User $user) {
+                    return date("d.m.Y h:m:i", $user->created_at);
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function (User $user) {
+                    return date("d.m.Y h:m:i", $user->updated_at);
+                }
+            ],
         ],
     ]) ?>
 
