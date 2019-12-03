@@ -72,8 +72,7 @@ use yii\helpers\Html;
 
                 <!-- User Account: style can be found in dropdown.less -->
                 <?php
-                $user = &Yii::$app->user->identity;
-                $username = Yii::$app->user->isGuest ? 'Гость' : ($user->last_name . " " . $user->first_name);
+                $username = Yii::$app->user->isGuest ? 'Гость' : (Yii::$app->user->identity->last_name . " " . Yii::$app->user->identity->first_name);
                 ?>
 
                 <li class="dropdown user user-menu">
@@ -87,7 +86,7 @@ use yii\helpers\Html;
                             <img src="/img/user-girl.png" class="img-circle" alt="User Image" height="160"/>
 
                             <p> <?= $username ?>
-                                <small><?= $user->position ?></small>
+                                <small><?= Yii::$app->user->identity->position ?? '' ?></small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
