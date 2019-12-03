@@ -32,6 +32,8 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $password;
+
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
@@ -55,7 +57,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            'timestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+                'value' => date('Y-m-d H:i:s'),
+            ]
         ];
     }
 
@@ -65,17 +70,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at', 'role'], 'integer'],
+            [['password_hash', 'phone'], 'required'],
+            [['status', 'role'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
+            [['auth_key', 'created_at', 'updated_at'], 'string', 'max' => 32],
             [['position', 'first_name', 'last_name', 'father_name', 'phone'], 'string', 'max' => 250],
             [['image'], 'string', 'max' => 500],
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
-            ['role', 'default', 'value' => self::ROLE_USER],
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            [['role'], 'default', 'value' => self::ROLE_USER],
+            [['status'], 'default', 'value' => self::STATUS_INACTIVE],
+            [['password'], 'string', 'min' => 5]
         ];
     }
 
@@ -126,6 +132,7 @@ class User extends ActiveRecord implements IdentityInterface
             'last_name'            => 'Фамилия',
             'father_name'          => 'Отчество',
             'phone'                => 'Телефон',
+            'password'             => 'Пароль'
         ];
     }
 
@@ -165,6 +172,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByPhone($phone)
     {
+        $phone = substr($phone, -10);
         return static::findOne([
             'phone' => $phone,
             'status' => self::STATUS_ACTIVE,

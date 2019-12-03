@@ -38,7 +38,7 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    Copyright &copy; 2019 <a href="http://agawater.ru">agawater.ru</a>. All rights reserved.
+    &copy; 2019 <a href="http://agawater.ru">agawater.ru</a>. Все права защищены.
 </footer>
 
 <!-- Control Sidebar -->

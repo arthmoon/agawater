@@ -3,20 +3,20 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
-use johnitvn\ajaxcrud\CrudAsset;
+use johnitvn\ajaxcrud\CrudAsset; 
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\UserSearch */
+/* @var $searchModel common\models\DeviceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Пользователи';
+$this->title = 'Станции';
 $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
 ?>
-<div class="user-index">
+<div class="device-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
@@ -27,19 +27,19 @@ CrudAsset::register($this);
             'toolbar'=> [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Добавить пользователя','class'=>'btn btn-default']).
+                    ['role'=>'modal-remote','title'=> 'Добавить водокачку','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
                     '{toggleData}'.
                     '{export}'
                 ],
-            ],
+            ],          
             'striped' => true,
             'condensed' => true,
-            'responsive' => true,
+            'responsive' => true,          
             'panel' => [
-                'type' => 'primary',
-                'heading' => '<i class="glyphicon glyphicon-user"></i>',
+                'type' => 'primary', 
+                'heading' => '<i class="glyphicon glyphicon-list"></i>',
                 'before'=>'',
                 'after'=>BulkButtonWidget::widget([
                             'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Удалить все',
@@ -50,9 +50,9 @@ CrudAsset::register($this);
                                     'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
                                     'data-request-method'=>'post',
                                     'data-confirm-title'=>'Подтверждение',
-                                    'data-confirm-message'=>'Вы хотите удалить этих пользователей?'
+                                    'data-confirm-message'=>'Вы хотите удалить станции?'
                                 ]),
-                        ]).
+                        ]).                        
                         '<div class="clearfix"></div>',
             ]
         ])?>

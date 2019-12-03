@@ -37,15 +37,9 @@ use yii\widgets\DetailView;
             ],
             [
                 'attribute' => 'created_at',
-                'value' => function (User $user) {
-                    return date("d.m.Y h:m:i", $user->created_at);
-                }
             ],
             [
                 'attribute' => 'updated_at',
-                'value' => function (User $user) {
-                    return date("d.m.Y h:m:i", $user->updated_at);
-                }
             ],
         ],
     ]) ?>

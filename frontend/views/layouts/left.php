@@ -19,9 +19,9 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
 //                  ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Пользователи', 'icon' => 'user-o', 'url' => ['/user']],
-                    ['label' => 'Абоненты', 'icon' => 'address-book-o', 'url' => ['/debug']],
-                    ['label' => 'Водокачки', 'icon' => 'tv', 'url' => ['/debug']],
+                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user']],
+                    ['label' => 'Станции', 'icon' => 'shower', 'url' => ['/device']],
+                    ['label' => 'Абоненты', 'icon' => 'address-book', 'url' => ['/customer']],
 //                  ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     /*[
                         'label' => 'Some tools',

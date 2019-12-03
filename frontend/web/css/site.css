@@ -1,17 +1,18 @@
-html, body {
-    font-family: 'Ubuntu', sans-serif !important;
+html, body#agawater-body {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Ubuntu', sans-serif !important;
 }
 
-.login-page .login-box .login-logo{
+.login-page .login-box .login-logo {
     font-size: 26px;
     margin-bottom: 10px;
 }
 
-.login-page #login-form .form-control, .login-page #login-form .btn{
+.login-page #login-form .form-control, .login-page #login-form .btn {
     border-radius: 2px;
 }
 
@@ -26,9 +27,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 18px;
     color: #99b0c7;
     line-height: 40px;
+    font-weight: 500;
 }
 
-#agawater-body .navbar-nav>.user-menu>.dropdown-menu {
+#agawater-body .navbar-nav > .user-menu > .dropdown-menu {
     border-top-width: 0;
     border-right-width: 0;
     padding-top: 0;
@@ -58,7 +60,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 #agawater-body label.control-label {
-    font-weight: normal;
+    font-weight: 500;
 }
 
 #agawater-body label.label {
@@ -81,8 +83,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 14px;
 }
 
-#agawater-body .table-bordered > thead > tr > th {
+#agawater-body .table-bordered > thead > tr > th, #agawater-body .table-bordered > tbody > tr > th {
     font-weight: 500;
+}
+
+#agawater-body .table > tbody > tr > td, #agawater-body .table > tbody > tr > th {
+    padding: 6px 8px;
 }
 
 #agawater-body.skin-blue-light .sidebar-menu > li > a {
@@ -129,4 +135,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 36px;
     font-weight: 500;
     color: #444;
+}
+
+#agawater-body h4.modal-title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 8px;
 }

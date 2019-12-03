@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
@@ -70,19 +71,23 @@ use yii\helpers\Html;
                 </li>
 
                 <!-- User Account: style can be found in dropdown.less -->
+                <?php
+                $user = &Yii::$app->user->identity;
+                $username = Yii::$app->user->isGuest ? 'Гость' : ($user->last_name . " " . $user->first_name);
+                ?>
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/img/user-girl.png" class="user-image" alt="User Image" width="160" height="160"/>
-                        <span class="hidden-xs">Дашиев Булат</span>
+                        <img src="/img/user.png" class="user-image" alt="User Image" width="160" height="160"/>
+                        <span class="hidden-xs"><?= $username ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="/img/user-girl.png" class="img-circle" alt="User Image" height="160"/>
 
-                            <p>Дашиев Булат
-                                <small>Главный инженер</small>
+                            <p> <?= $username ?>
+                                <small><?= $user->position ?></small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

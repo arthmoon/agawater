@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -21,7 +22,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>АГА</b> Водоснабжение</a>
+        <a href="#"><b>АГА Водоснабжение</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -29,10 +30,18 @@ $fieldOptions2 = [
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
+
+
         <?= $form
-            ->field($model, 'phone', $fieldOptions1)
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('+7**********')]) ?>
+            ->field($model, 'phone')
+            ->widget(MaskedInput::classname(), [
+                'mask'          => '+79999999999',
+                'options'       => ['placeholder' => $model->getAttributeLabel('phone')],
+                'clientOptions' => [
+                    'removeMaskOnSubmit' => false,
+                ],
+            ])
+            ->label(false) ?>
 
         <?= $form
             ->field($model, 'password', $fieldOptions2)

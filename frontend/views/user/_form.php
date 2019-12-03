@@ -11,7 +11,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->textInput([
+        'maxlength' => true,
+        'autocomplete' => 'off'
+    ]) ?>
+
+    <?= $form->field($model, 'password')->passwordInput(['autocomplete' => 'off']) ?>
 
     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
@@ -21,15 +26,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput([
+        'maxlength' => true,
+        'autocomplete' => 'off'
+    ]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->widget(\kartik\select2\Select2::className(), [
+        'data' => \common\models\User::getStatusList()
+    ]) ?>
 
-    <?= $form->field($model, 'role')->textInput() ?>
+    <?= $form->field($model, 'role')->widget(\kartik\select2\Select2::className(), [
+        'data' => \common\models\User::getRoleList()
+    ]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
-
-  
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
 	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -22,7 +22,7 @@ return [
         'attribute' => 'user_info',
         'label' => 'Информация',
         'value' => function (User $user) {
-            return "{$user->username} ($user->phone)<br/>{$user->email}<br/>{$user->last_name} {$user->first_name} {$user->father_name}";
+            return "$user->phone<br/>{$user->last_name} {$user->first_name} {$user->father_name}";
         },
         'format' => 'raw',
     ],
