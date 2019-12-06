@@ -7,6 +7,7 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -38,7 +39,7 @@ class SiteController extends Controller
                 HttpBearerAuth::class,
                 QueryParamAuth::class,
             ],
-            'except'      => ['index'],
+            'except'      => ['index', 'ping'],
         ];
         return $behaviors;
     }
@@ -59,11 +60,12 @@ class SiteController extends Controller
      */
     public function actionPing()
     {
-        $request = Yii::$app->request->rawBody;
-        $device = Device::find()->where(['uid' => $request['uid']]);
+        $request = Json::decode(Yii::$app->request->rawBody) ?? [];
+        $device = Device::find()->where(['uid' => $request['uid']])->one();
         if (!$device) {
             $device         = new Device();
             $device->status = Device::STATUS_ON;
+            $device->uid    = $request['uid'];
         }
         $device->name        = $request['name'];
         $device->ip          = $request['ip'];
