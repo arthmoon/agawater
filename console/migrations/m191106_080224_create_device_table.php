@@ -20,6 +20,7 @@ class m191106_080224_create_device_table extends Migration
             'last_online' => $this->dateTime()->comment('Last Online'),
             'last_sync'   => $this->dateTime()->comment('Last Sync'),
             'status'      => $this->integer()->comment('Status'),
+            'auth_key'    => $this->string(32),
             'params'      => $this->text()
         ]);
     }

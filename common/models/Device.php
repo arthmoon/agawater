@@ -12,6 +12,7 @@ use Yii;
  * @property string $name Device Name
  * @property string $ip Internal Ip
  * @property string $last_online Last Online
+ * @property string $auth_key
  * @property string $last_sync Last Sync
  * @property int $status Status
  * @property string $params Params
@@ -38,6 +39,7 @@ class Device extends \yii\db\ActiveRecord
         return [
             [['last_online', 'last_sync'], 'safe'],
             [['status'], 'integer'],
+            [['auth_key'], 'string', 'max' => 32],
             [['uid', 'name', 'ip'], 'string', 'max' => 100],
             [['params'], 'string'],
         ];
@@ -51,6 +53,7 @@ class Device extends \yii\db\ActiveRecord
         return [
             'id'          => 'ID',
             'uid'         => 'Идентификатор',
+            'auth_key'    => 'Ключ авторизации',
             'name'        => 'Наименование',
             'ip'          => 'IP адрес',
             'last_online' => 'Онлайн',
