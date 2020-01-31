@@ -21,7 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'last_sync')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->widget(\kartik\select2\Select2::className(), [
+        'data' => \common\models\Device::getStatusList()
+    ]) ?>
 
     <?= $form->field($model, 'params')->textarea(['rows' => 6]) ?>
 

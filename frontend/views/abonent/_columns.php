@@ -1,6 +1,5 @@
 <?php
 
-use common\models\Device;
 use yii\helpers\Url;
 
 return [
@@ -14,38 +13,31 @@ return [
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'uid',
+        'attribute' => 'id',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'name',
+        'attribute' => 'first_name',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'ip',
+        'attribute' => 'last_name',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'last_online',
+        'attribute' => 'father_name',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'last_sync',
+        'attribute' => 'phone',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'status',
-        'value' => function (Device $device) {
-            $class = $device->status == Device::STATUS_ON ? 'success' : 'danger';
-            return \yii\helpers\Html::label(Device::getStatusList()[$device->status], 'status', [
-                'class' => "label label-$class"
-            ]);
-        },
-        'format' => 'raw'
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'params',
+        'attribute' => 'limit',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
@@ -58,10 +50,11 @@ return [
         'updateOptions' => ['role' => 'modal-remote', 'title' => 'Update', 'data-toggle' => 'tooltip'],
         'deleteOptions' => ['role' => 'modal-remote', 'title' => 'Delete',
             'data-confirm' => false,
-            'data-method' => false,// for overide yii data api
+            'data-method' => false, // for overide yii data api
             'data-request-method' => 'post',
             'data-toggle' => 'tooltip',
             'data-confirm-title' => 'Are you sure?',
-            'data-confirm-message' => 'Are you sure want to delete this item'],
+            'data-confirm-message' => 'Are you sure want to delete this item'
+        ],
     ],
 ];   

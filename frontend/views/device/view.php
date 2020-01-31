@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Device;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -10,13 +11,17 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'uid',
             'name',
             'ip',
             'last_online',
             'last_sync',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function (Device $device) {
+                    return Device::getStatusList()[$device->status];
+                }
+            ],
             'params:ntext',
         ],
     ]) ?>

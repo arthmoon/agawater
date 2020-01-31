@@ -39,7 +39,7 @@ class SiteController extends Controller
                 HttpBearerAuth::class,
                 QueryParamAuth::class,
             ],
-            'except'      => ['index', 'ping'],
+            'except' => ['index', 'ping'],
         ];
         return $behaviors;
     }
@@ -61,14 +61,13 @@ class SiteController extends Controller
     public function actionPing()
     {
         $request = Json::decode(Yii::$app->request->rawBody) ?? [];
-        $device = Device::find()->where(['uid' => $request['uid']])->one();
+        $device  = Device::find()->where(['uid' => $request['uid']])->one();
         if (!$device) {
             $device         = new Device();
             $device->status = Device::STATUS_ON;
             $device->uid    = $request['uid'];
+            $device->ip     = $request['ip'];
         }
-        $device->name        = $request['name'];
-        $device->ip          = $request['ip'];
         $device->last_online = date('Y-m-d h:i:s');
         return $device->save(false);
     }

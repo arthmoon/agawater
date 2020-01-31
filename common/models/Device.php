@@ -64,6 +64,17 @@ class Device extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return [
+            self::STATUS_ON  => 'Активен',
+            self::STATUS_OFF => 'Отключен'
+        ];
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getCommands()

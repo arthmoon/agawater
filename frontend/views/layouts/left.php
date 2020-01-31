@@ -20,8 +20,9 @@
                 'items' => [
 //                  ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user']],
-                    ['label' => 'Станции', 'icon' => 'shower', 'url' => ['/device']],
-                    ['label' => 'Абоненты', 'icon' => 'address-book', 'url' => ['/customer']],
+                    ['label' => 'Оборудование', 'icon' => 'shower', 'url' => ['/device']],
+                    ['label' => 'Настройки', 'icon' => 'terminal', 'url' => ['/command']],
+                    ['label' => 'Абоненты', 'icon' => 'address-book', 'url' => ['/abonent']],
 //                  ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     /*[
                         'label' => 'Some tools',

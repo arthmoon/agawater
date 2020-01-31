@@ -7,16 +7,16 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\DeviceSearch */
+/* @var $searchModel common\models\CommandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Оборудование';
+$this->title = 'Настройки оборудования';
 $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
 ?>
-<div class="device-index">
+<div class="command-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
@@ -27,7 +27,7 @@ CrudAsset::register($this);
             'toolbar'=> [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Добавить водокачку','class'=>'btn btn-default']).
+                    ['role'=>'modal-remote','title'=> 'Create new Commands','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
                     '{toggleData}'.
@@ -49,8 +49,8 @@ CrudAsset::register($this);
                                     'role'=>'modal-remote-bulk',
                                     'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
                                     'data-request-method'=>'post',
-                                    'data-confirm-title'=>'Подтверждение',
-                                    'data-confirm-message'=>'Вы хотите удалить станции?'
+                                    'data-confirm-title'=>'Are you sure?',
+                                    'data-confirm-message'=>'Are you sure want to delete this item'
                                 ]),
                         ]).                        
                         '<div class="clearfix"></div>',

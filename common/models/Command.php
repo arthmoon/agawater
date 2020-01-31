@@ -47,11 +47,11 @@ class Command extends \yii\db\ActiveRecord
     {
         return [
             'id'          => 'ID',
-            'device_id'   => 'Device',
-            'input'       => 'Command script',
-            'output'      => 'Command output',
-            'created_at'  => 'Command create time',
-            'executed_at' => 'Command exec datetime',
+            'device_id'   => 'Оборудование',
+            'input'       => 'Script',
+            'output'      => 'Результат',
+            'created_at'  => 'Создан',
+            'executed_at' => 'Выполнен',
         ];
     }
 
