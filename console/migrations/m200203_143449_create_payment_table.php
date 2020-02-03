@@ -19,10 +19,12 @@ class m200203_143449_create_payment_table extends Migration
         }
 
         $this->createTable('{{%payment}}', [
-            'id' => $this->primaryKey(),
-            'abonent_id' => $this->integer(),
-            'sum' => $this->decimal(16,2),
-            'days' => $this->integer()
+            'id'           => $this->primaryKey()->comment('Номер платежа'),
+            'abonent_id'   => $this->integer()->comment('Абонент'),
+            'sum'          => $this->decimal(16,2)->comment('Сумма'),
+            'family_count' => $this->integer()->comment('Состав семьи'),
+            'dt'           => $this->dateTime()->comment('Дата платежа'),
+            'days'         => $this->integer()->comment('Кло-во дней')
         ]);
     }
 

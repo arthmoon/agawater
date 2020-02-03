@@ -19,16 +19,17 @@ class m191210_160549_create_abonent_table extends Migration
         }
 
         $this->createTable('{{%abonent}}', [
-            'id'          => $this->primaryKey(),
-            'uid'         => $this->string(64),
-            'first_name'  => $this->string(255),
-            'last_name'   => $this->string(255),
-            'father_name' => $this->string(255),
-            'phone'       => $this->string(16),
-            'status'      => $this->smallInteger()->defaultValue(10),
-            'limit'       => $this->integer(),
-            'days'        => $this->integer(),
-            'payment_dt'  => $this->dateTime()
+            'id'           => $this->primaryKey(),
+            'uid'          => $this->string(64)->comment('Ключ'),
+            'first_name'   => $this->string(255)->comment('Имя'),
+            'last_name'    => $this->string(255)->comment('Фамилия'),
+            'father_name'  => $this->string(255)->comment('Отчество'),
+            'phone'        => $this->string(16)->comment('Телефон'),
+            'status'       => $this->smallInteger()->defaultValue(10)->comment('Статус'),
+            'family_count' => $this->integer()->comment('Состав семьи'),
+            'limit'        => $this->integer()->comment('Лимит'),
+            'days'         => $this->integer()->comment('Дней осталось'),
+            'payment_dt'   => $this->dateTime()->comment('Дата последнего платежа')
         ], $tableOptions);
 
         $this->createIndex('abonent-uid', 'abonent', 'uid', false);
