@@ -8,14 +8,16 @@ use Yii;
  * This is the model class for table "device".
  *
  * @property int $id
- * @property string $uid Device Id
- * @property string $name Device Name
- * @property string $ip Internal Ip
- * @property string $last_online Last Online
- * @property string $auth_key
- * @property string $last_sync Last Sync
+ * @property string $uid UID
+ * @property string $name Наименование
+ * @property string $ip IP адрес
+ * @property string $auth_key Ключ авторизации
+ * @property string $last_online Дата связи
+ * @property string $last_sync Дата синхронизации
  * @property int $status Status
- * @property string $params Params
+ * @property string $params Параметры
+ * @property string $anydesk_id AnyDesk
+ * @property string $teamviewer_id TeamViewer
  *
  * @property Command[] $commands
  */
@@ -39,7 +41,7 @@ class Device extends \yii\db\ActiveRecord
         return [
             [['last_online', 'last_sync'], 'safe'],
             [['status'], 'integer'],
-            [['auth_key'], 'string', 'max' => 32],
+            [['auth_key', 'anydesk_id', 'teamviewer_id'], 'string', 'max' => 32],
             [['uid', 'name', 'ip'], 'string', 'max' => 100],
             [['params'], 'string'],
         ];
@@ -51,15 +53,17 @@ class Device extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => 'ID',
-            'uid'         => 'Идентификатор',
-            'auth_key'    => 'Ключ авторизации',
-            'name'        => 'Наименование',
-            'ip'          => 'IP адрес',
-            'last_online' => 'Онлайн',
-            'last_sync'   => 'Синхронизация',
-            'status'      => 'Статус',
-            'params'      => 'Параметры',
+            'id'            => 'ID',
+            'uid'           => 'Идентификатор',
+            'auth_key'      => 'Ключ авторизации',
+            'name'          => 'Наименование',
+            'ip'            => 'IP адрес',
+            'last_online'   => 'Онлайн',
+            'last_sync'     => 'Синхронизация',
+            'status'        => 'Статус',
+            'params'        => 'Параметры',
+            'anydesk_id'    => 'AnyDesk',
+            'teamviewer_id' => 'TeamViewer'
         ];
     }
 

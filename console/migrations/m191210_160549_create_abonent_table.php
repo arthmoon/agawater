@@ -17,6 +17,7 @@ class m191210_160549_create_abonent_table extends Migration
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
+
         $this->createTable('{{%abonent}}', [
             'id'          => $this->primaryKey(),
             'uid'         => $this->string(64),
@@ -41,10 +42,10 @@ class m191210_160549_create_abonent_table extends Migration
      */
     public function safeDown()
     {
-//        $this->dropIndex('abonent-father_name', 'abonent');
-//        $this->dropIndex('abonent-last_name', 'abonent');
-//        $this->dropIndex('abonent-first_name', 'abonent');
-//        $this->dropIndex('abonent-uid', 'abonent');
+        $this->dropIndex('abonent-father_name', 'abonent');
+        $this->dropIndex('abonent-last_name', 'abonent');
+        $this->dropIndex('abonent-first_name', 'abonent');
+        $this->dropIndex('abonent-uid', 'abonent');
 
         $this->dropTable('{{%abonent}}');
     }
