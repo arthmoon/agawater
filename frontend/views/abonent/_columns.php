@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use common\models\Abonent;
 
 return [
     [
@@ -10,22 +11,25 @@ return [
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
-    ],
+    ],/*
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'id',
+    ],*/
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'fio',
+        'label' => 'ФИО',
+        'value' => function (Abonent $abonent) {
+            return "{$abonent->last_name} {$abonent->first_name} {$abonent->father_name}";
+        }
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'first_name',
-    ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'last_name',
-    ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'father_name',
+        'attribute' => 'uid',
+        'value' => function (Abonent $abonent) {
+            return mb_strtoupper($abonent->uid);
+        }
     ],
     [
         'class' => '\kartik\grid\DataColumn',
@@ -33,11 +37,29 @@ return [
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'status',
+        'attribute' => 'limit',
     ],
     [
         'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'limit',
+        'attribute' => 'days',
+    ],
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'payment_dt',
+    ],
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'status',
+        'value' => function (Abonent $abonent) {
+            $class = 'success';
+            if ($abonent->status == Abonent::STATUS_INACTIVE) $class = 'warning';
+            if ($abonent->status == Abonent::STATUS_DELETED) $class = 'danger';
+            return \yii\helpers\Html::label(Abonent::getStatusList()[$abonent->status], 'status', [
+                'class' => "label label-$class"
+            ]);
+        },
+        'format' => 'raw',
+        'filter' => Abonent::getStatusList()
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

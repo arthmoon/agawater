@@ -12,14 +12,15 @@ use common\models\Abonent;
  */
 class AbonentSearch extends Abonent
 {
+    public $fio;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'status', 'limit'], 'integer'],
-            [['first_name', 'last_name', 'father_name', 'phone'], 'safe'],
+            [['id', 'status', 'limit', 'days'], 'integer'],
+            [['first_name', 'last_name', 'father_name', 'phone', 'fio', 'uid', 'payment_dt'], 'safe'],
         ];
     }
 
@@ -56,15 +57,18 @@ class AbonentSearch extends Abonent
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'     => $this->id,
             'status' => $this->status,
-            'limit' => $this->limit,
+            'limit'  => $this->limit,
         ]);
 
-        $query->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'father_name', $this->father_name])
-            ->andFilterWhere(['like', 'phone', $this->phone]);
+        $query->andFilterWhere(['OR',
+            ['LIKE', 'first_name',  $this->fio],
+            ['LIKE', 'last_name',   $this->fio],
+            ['LIKE', 'father_name', $this->fio],
+        ]);
+
+        $query->andFilterWhere(['like', 'phone', $this->phone]);
 
         return $dataProvider;
     }

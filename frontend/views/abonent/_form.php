@@ -17,6 +17,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'father_name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'uid')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
