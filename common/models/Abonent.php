@@ -17,6 +17,7 @@ use Yii;
  * @property int|null $limit
  * @property int|null $days
  * @property string|null $payment_dt
+ * @property int|null $family_count
  */
 class Abonent extends \yii\db\ActiveRecord
 {
@@ -38,7 +39,7 @@ class Abonent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'limit', 'days'], 'integer'],
+            [['status', 'limit', 'days', 'family_count'], 'integer'],
             [['first_name', 'last_name', 'father_name'], 'string', 'max' => 255],
             [['payment_dt'], 'string'],
             [['phone'], 'string', 'max' => 16],
