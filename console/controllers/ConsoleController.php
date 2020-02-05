@@ -67,6 +67,7 @@ class ConsoleController extends Controller
             $abonentModel->last_name   = $abonent['family'];
             $abonentModel->father_name = $abonent['sname'];
             $abonentModel->uid         = $abonent['btnid'];
+            $payment                   = null;
             if ($abonent['q'] > 0) {
                 $abonentModel->limit   = $abonent['q'];
                 $history = $db_reg_ru
@@ -85,7 +86,6 @@ class ConsoleController extends Controller
 
                     $payment->days       = (int)$expiration_dt->diff(new \DateTime())->format("%d");
                     $payment->limit      = $abonent['q'];
-                    $payment->save(false);
 
                     $abonentModel->days       = $payment->days;
                     $abonentModel->payment_dt = date("Y-m-d H:i:s");
@@ -96,6 +96,11 @@ class ConsoleController extends Controller
 
             if (!$abonentModel->save()) {
                 $errors[] = $abonentModel->errors;
+            }
+            if ($payment) {
+                if (!$payment->save()) {
+                    $errors[] = $payment->errors;
+                }
             }
             Console::updateProgress($i, $count);
         }
