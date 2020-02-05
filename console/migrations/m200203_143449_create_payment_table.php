@@ -28,7 +28,7 @@ class m200203_143449_create_payment_table extends Migration
             'limit'        => $this->integer()->comment('Кол-во литров')
         ]);
 
-        $this->addForeignKey('payment-abonent-fk', 'payment', 'abonent_id', 'abonent', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('payment-abonent-fk', 'payment', 'abonent_id', 'abonent', 'id', 'NO ACTION', 'NO ACTION');
     }
 
     /**
@@ -36,7 +36,7 @@ class m200203_143449_create_payment_table extends Migration
      */
     public function safeDown()
     {
-//        $this->dropForeignKey('payment-abonent-fk', 'payment');
+        $this->dropForeignKey('payment-abonent-fk', 'payment');
 
         $this->dropTable('{{%payment}}');
     }

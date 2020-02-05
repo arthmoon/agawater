@@ -27,8 +27,8 @@ class m200203_154050_create_history_table extends Migration
             'dt'          => $this->dateTime()        ->comment('Время')
         ], $tableOptions);
 
-        $this->addForeignKey('history-abonent-fk', 'history', 'abonent_id', 'abonent', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('history-device-fk', 'history', 'device_id', 'device', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('history-abonent-fk', 'history', 'abonent_id', 'abonent', 'id', 'NO ACTION', 'NO ACTION');
+        $this->addForeignKey('history-device-fk', 'history', 'device_id', 'device', 'id', 'NO ACTION', 'NO ACTION');
     }
 
     /**
@@ -36,8 +36,8 @@ class m200203_154050_create_history_table extends Migration
      */
     public function safeDown()
     {
-//        $this->dropForeignKey('history-device-fk', 'history');
-//        $this->dropForeignKey('history-abonent-fk', 'history');
+        $this->dropForeignKey('history-device-fk', 'history');
+        $this->dropForeignKey('history-abonent-fk', 'history');
 
         $this->dropTable('{{%history}}');
     }
