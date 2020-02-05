@@ -24,8 +24,11 @@ class m200203_143449_create_payment_table extends Migration
             'sum'          => $this->decimal(16,2)->comment('Сумма'),
             'family_count' => $this->integer()->comment('Состав семьи'),
             'dt'           => $this->dateTime()->comment('Дата платежа'),
-            'days'         => $this->integer()->comment('Кло-во дней')
+            'days'         => $this->integer()->comment('Кол-во дней'),
+            'limit'        => $this->integer()->comment('Кол-во литров')
         ]);
+
+        $this->addForeignKey('payment-abonent-fk', 'payment', 'abonent_id', 'abonent', 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -33,6 +36,8 @@ class m200203_143449_create_payment_table extends Migration
      */
     public function safeDown()
     {
+//        $this->dropForeignKey('payment-abonent-fk', 'payment');
+
         $this->dropTable('{{%payment}}');
     }
 }

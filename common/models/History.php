@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "history".
@@ -37,17 +39,32 @@ class History extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt']
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+    /**
      * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'abonent_id' => 'Абонент',
-            'device_id' => 'Станция',
-            'amount' => 'Кол-во',
+            'id'          => 'ID',
+            'abonent_id'  => 'Абонент',
+            'device_id'   => 'Станция',
+            'amount'      => 'Кол-во',
             'description' => 'Описание',
-            'dt' => 'Время',
+            'dt'          => 'Время',
         ];
     }
 }
