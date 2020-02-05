@@ -55,6 +55,7 @@ class ConsoleController extends Controller
         $abonents = $db_reg_ru->createCommand("select * from _wtr_accounts")->queryAll();
         $count = count($abonents);
         Abonent::deleteAll();
+        Payment::deleteAll();
         $i      = 0;
         $errors = [];
         Console::startProgress(0, $count, 'sync abonents: ');
